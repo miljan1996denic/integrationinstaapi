@@ -1,0 +1,14 @@
+alembic==1.7.1 
+fastapi==0.63.0 
+uvicorn==0.13.4 
+httpx==0.19.0 
+pydantic==1.8.2 
+SQLAlchemy==1.4.51 
+psycopg2-binary==2.9.3 
+requests==2.28.1
+fastapi-utils==0.2.1 
+python-multipart==0.0.5 
+python-jose==3.3.0 
+passlib==1.7.4 
+bcrypt==4.0.1 
+pytest==7.2.0 

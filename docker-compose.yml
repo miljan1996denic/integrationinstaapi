@@ -1,0 +1,35 @@
+version: "3.9"
+
+x-postgres-environment: &postgres-environment
+  POSTGRES_USER: postgres
+  POSTGRES_DB: instaintegration_db
+  POSTGRES_PASSWORD: password
+  
+services:
+  instaintegrationnew-postgres:
+    image: postgres:15.2
+    container_name: instaintegrationnew-postgres
+    mem_limit: 512m
+    ports:
+      - "5437:5432"
+    environment:
+      <<: *postgres-environment
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+
+  instaintegrationnew-app:
+    mem_limit: 512m
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - "instaintegrationnew-postgres"
+    env_file:
+      - ./app/.env.dev
+    container_name: instaintegrationnew-app
+    ports:
+      - "5679:5678"
+      - "5007:80"
+    command: "app/bin/runserver_vsc.sh"
+    volumes:
+      - ./app:/app
